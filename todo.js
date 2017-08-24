@@ -14,11 +14,17 @@ $('ul').on('click', 'span', function(event) {
 
 //add todos through input
 $('input[type="text"]').keypress(function(event) {
-  //capture input in NewTodo
+  //capture input in newTodo
   if (event.which === 13) {
     var newTodo = $(this).val();
-    $(this).val('');
-    $('ul').append('<li><span><i class="fa fa-trash"></i></span> ' + newTodo + '</li>')
+    //stops appending blank inputs with enter
+    if (newTodo === '') {
+      return false;
+    } else {
+      newTodo = $(this).val();
+      $(this).val('');
+      $('ul').append('<li><span><i class="fa fa-trash"></i></span> ' + newTodo + '</li>')
+    }
   }
 });
 

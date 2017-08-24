@@ -1,12 +1,24 @@
+
 //check off specific todos by clicking
-$('li').click(function() {
+$('ul').on('click', 'li', function() {
   $(this).toggleClass('completed');
 });
 
 //delete todos with fadeOut
-$('span').click(function(event) {
+$('ul').on('click', 'span', function(event) {
   $(this).parent().fadeOut(500, function() {
     $(this).remove();
   })
   event.stopPropagation();
+});
+
+//add todos through input
+$('input[type="text"]').keypress(function(event) {
+  //capture input in NewTodo
+  if (event.which === 13) {
+    var newTodo = $(this).val();
+    $(this).val('');
+    $('ul').append('<li><span>X</span> ' + newTodo + '</li>')
+  }
+
 });
